@@ -32,6 +32,11 @@ abstract class AbstractController
         return new Response($content);
     }
 
+    public function getRequest()
+    {
+        return $this->app['factory']->getRequest();
+    }
+
     /**
      * @return string
      */

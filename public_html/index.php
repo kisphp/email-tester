@@ -9,15 +9,6 @@ $app['debug'] = true;
 
 $app['factory'] = new Factory($app);
 
-$app['swiftmailer.options'] = array(
-    'host' => 'localhost',
-    'port' => '25',
-    'username' => '',
-    'password' => '',
-    'encryption' => null,
-    'auth_mode' => null
-);
-
 $app->register(new \Silex\Provider\TranslationServiceProvider(), [
     'locale_fallbacks' => ['en'],
 ]);
@@ -26,6 +17,14 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 ]);
 
 $app->register(new \Silex\Provider\FormServiceProvider());
+$app->register(new \Silex\Provider\SwiftmailerServiceProvider(), [
+    'host' => 'localhost',
+    'port' => '25',
+    'username' => '',
+    'password' => '',
+    'encryption' => null,
+    'auth_mode' => null
+]);
 
 $app->mount('/', new \Kisphp\Core\KisphpControllerProvider());
 

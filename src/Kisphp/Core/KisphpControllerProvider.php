@@ -20,21 +20,30 @@ class KisphpControllerProvider implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', function(Application $app) {
-            $request = $app['factory']->getRequest();
-            $controller = 'Index';
-            $method = 'index';
-            $ctrl = $app['factory']->createController($controller);
-            $ctrl->setTemplate(sprintf(
-                '%s/%s.twig',
-                $controller,
-                $method
-            ));
+            return $this->runIndex($app);
+        });
 
-            $methodAction = sprintf('%sAction', $method);
-
-            return $ctrl->$methodAction($request);
+        $controllers->post('/', function(Application $app) {
+            return $this->runIndex($app);
         });
 
         return $controllers;
+    }
+
+    protected function runIndex(Application $app)
+    {
+        $request = $app['factory']->getRequest();
+        $controller = 'Index';
+        $method = 'index';
+        $ctrl = $app['factory']->createController($controller);
+        $ctrl->setTemplate(sprintf(
+            '%s/%s.twig',
+            $controller,
+            $method
+        ));
+
+        $methodAction = sprintf('%sAction', $method);
+
+        return $ctrl->$methodAction($request);
     }
 }
