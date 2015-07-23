@@ -13,11 +13,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3.0",
-    "symfony/form": "^3.0@dev",
-    "symfony/validator": "^3.0@dev",
     "symfony/config": "^3.0@dev",
-    "symfony/translation": "^3.0@dev",
-    "symfony/security-csrf": "^3.0@dev",
     "symfony/twig-bridge": "^3.0@dev",
     "symfony/http-foundation": "2.7.*@dev",
     "silex/silex": "~1.3",

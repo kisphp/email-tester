@@ -16,14 +16,10 @@ $app['debug'] = true;
 
 $app['factory'] = new Factory($app);
 
-$app->register(new \Silex\Provider\TranslationServiceProvider(), [
-    'locale_fallbacks' => ['en'],
-]);
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => dirname(__DIR__) . '/src/Kisphp/Views/',
 ]);
 
-$app->register(new \Silex\Provider\FormServiceProvider());
 $app->register(new \Silex\Provider\SwiftmailerServiceProvider(), [
     'host' => 'localhost',
     'port' => '25',
