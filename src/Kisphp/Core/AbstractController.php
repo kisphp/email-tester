@@ -25,6 +25,11 @@ abstract class AbstractController
         $this->app = $app;
     }
 
+    /**
+     * @param array $data
+     *
+     * @return Response
+     */
     public function createView(array $data)
     {
         $content = $this->app['twig']->render($this->getTemplate(), $data);
@@ -32,6 +37,9 @@ abstract class AbstractController
         return new Response($content);
     }
 
+    /**
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->app['factory']->getRequest();

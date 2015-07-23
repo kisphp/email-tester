@@ -8,6 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends AbstractController
 {
+    /**
+     * @param Request $request
+     *
+     * @throws \Exception
+     * @throws \phpmailerException
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction(Request $request)
     {
         $message = '';

@@ -30,6 +30,11 @@ class KisphpControllerProvider implements ControllerProviderInterface
         return $controllers;
     }
 
+    /**
+     * @param Application $app
+     *
+     * @return Response
+     */
     protected function runIndex(Application $app)
     {
         $request = $app['factory']->getRequest();

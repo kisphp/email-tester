@@ -13,12 +13,18 @@ class Factory
      */
     protected $app;
 
+    /**
+     * @param Application $app
+     */
     public function __construct(Application $app)
     {
         $this->app = $app;
         $this->app['request'] = Request::createFromGlobals();
     }
 
+    /**
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->app['request'];

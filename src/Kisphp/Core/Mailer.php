@@ -43,6 +43,9 @@ class Mailer
         $this->mail = $mail;
     }
 
+    /**
+     * @return \PHPMailer
+     */
     public function getMail()
     {
         return $this->mail;

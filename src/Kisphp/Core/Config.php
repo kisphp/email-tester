@@ -6,8 +6,11 @@ class Config
 {
     use SingletonTrait;
 
-    protected $params = array();
+    protected $params = [];
 
+    /**
+     * @param array $parameters
+     */
     public function setParams(array $parameters)
     {
         foreach ($parameters as $k => $v) {
@@ -15,11 +18,19 @@ class Config
         }
     }
 
+    /**
+     * @return array
+     */
     public function getParams()
     {
         return $this->params;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
     public static function get($name)
     {
         $cfg = static::getInstance();
