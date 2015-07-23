@@ -5,6 +5,9 @@
     <h1>Send test email</h1>
 
     <form action="" method="post">
+        {% if message is not empty %}
+        <div class="alert alert-{{ messageType }}">{{ message }}</div>
+        {% endif %}
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email" value="{{ form.email }}">

@@ -3,6 +3,13 @@
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use Kisphp\Core\Factory;
+use Kisphp\Core\Config;
+use Symfony\Component\Yaml\Parser;
+
+$yaml = new Parser();
+$params = $yaml->parse(file_get_contents(dirname(__DIR__).'/app/config/parameters.yml'));
+
+$config = Config::getInstance()->setParams($params['parameters']);
 
 $app = new Silex\Application();
 $app['debug'] = true;

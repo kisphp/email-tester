@@ -3,27 +3,41 @@
 namespace Kisphp\Controllers;
 
 use Kisphp\Core\AbstractController;
+use Kisphp\Core\Mailer;
 use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends AbstractController
 {
     public function indexAction(Request $request)
     {
+        $message = '';
+        $messageType = '';
         if ($request->isMethod(Request::METHOD_POST)) {
-            $message = \Swift_Message::newInstance()
-                ->setSubject($request->request->get('subject', 'Email Tester'))
-                ->setFrom(array('noreply@example.com'))
-                ->setTo(array($request->request->get('email')))
-                ->setBody($request->get('message'));
 
-            $this->app['mailer']->send($message);
+            $mail = (new Mailer())->getMail();
+
+            $mail->setFrom('no-reply@example.com', 'Test email');
+            $mail->addAddress($request->request->get('email'));
+            $mail->Subject = $request->request->get('subject', 'Email tester');
+            $mail->AltBody = 'This is a plain-text message body';
+            $mail->msgHTML($request->request->get('content'));
+
+            if (!$mail->send()) {
+                $message = "Mailer Error: " . $mail->ErrorInfo;
+                $messageType = 'danger';
+            } else {
+                $message = "Message sent!";
+                $messageType = 'success';
+            }
         }
 
         return $this->createView([
+            'message' => $message,
+            'messageType' => $messageType,
             'form' => [
                 'email' => $request->get('email', ''),
                 'subject' => $request->get('subject', ''),
-                'message' => $request->get('message', ''),
+                'content' => $request->get('content', ''),
             ]
         ]);
     }
